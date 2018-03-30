@@ -17,8 +17,8 @@ function activate(context) {
 
         var formatStr = '';
         if(!config.format) {
-            hour = hour>12 ? hour-12 : hour;
             formatStr = hour>12 ? ' pm' : ' am';
+            hour = hour>12 ? hour-12 : hour;
         }
         var dateText = `${config.pre}${addZero(hour).toString()}:${addZero(min).toString()}${formatStr}${config.post}`;
         
