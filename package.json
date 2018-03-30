@@ -1,7 +1,7 @@
 {
     "name": "time-inserter",
     "displayName": "Time Inserter",
-    "description": "Add current time (HH:MM) just where the cursor is.",
+    "description": "Insert current time (hh:mm) just where the cursor is.",
     "version": "0.0.1",
     "publisher": "mario-mra",
     "engines": {
@@ -11,7 +11,7 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.timeinserter"
+        "onCommand:timeinserter.insert"
     ],
     "main": "./extension",
     "contributes": {
@@ -21,16 +21,16 @@
             "properties": {
                 "timeinserter.pre": {
                     "type": "string",
-                    "default": "*[",
+                    "default": "",
                     "description": "String to add before the time."
                 },
                 "timeinserter.post": {
                     "type": "string",
-                    "default": "]*",
+                    "default": "",
                     "description": "String to add after the Time"
                 },
                 "timeinserter.format": {
-                    "type": "bool",
+                    "type": "boolean",
                     "default": true,
                     "description": "24hours format?"
                 }
@@ -38,9 +38,16 @@
         },
         "commands": [
             {
-                "command": "extension.timeinserter",
-                "title": "Add current time (HH:MM) just where the cursor is",
-                "key": "ctrl+alt+1",
+                "command": "timeinserter.insert",
+                "title": "Insert current time (hh:mm) just where the cursor is",
+                "when": "editorTextFocus"
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "timeinserter.insert",
+                "key": "Ctrl+Alt+1",
+                "mac": "Ctrl+Alt+1",
                 "when": "editorTextFocus"
             }
         ]
