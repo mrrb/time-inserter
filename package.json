@@ -1,8 +1,8 @@
 {
     "name": "time-inserter",
     "displayName": "Time Inserter",
-    "description": "Insert current time (hh:mm) just where the cursor is.",
-    "version": "0.0.1",
+    "description": "Insert current time (hh:mm) or date (dd/mm/yyyy) just where the cursor is.",
+    "version": "0.0.2",
     "publisher": "mario-mra",
     "engines": {
         "vscode": "^0.10.5"
@@ -11,7 +11,8 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:timeinserter.insert"
+        "onCommand:timeinserter.insertTime",
+        "onCommand:timeinserter.insertDate"
     ],
     "main": "./extension",
     "contributes": {
@@ -22,12 +23,17 @@
                 "timeinserter.pre": {
                     "type": "string",
                     "default": "",
-                    "description": "String to add before the time."
+                    "description": "String to add before the time/date."
                 },
                 "timeinserter.post": {
                     "type": "string",
                     "default": "",
-                    "description": "String to add after the Time"
+                    "description": "String to add after the time/date."
+                },
+                "timeinserter.dateSeparator": {
+                    "type": "string",
+                    "default": "/",
+                    "description": "String that separate the components of the date."
                 },
                 "timeinserter.format": {
                     "type": "boolean",
@@ -38,16 +44,27 @@
         },
         "commands": [
             {
-                "command": "timeinserter.insert",
+                "command": "timeinserter.insertTime",
                 "title": "Insert current time (hh:mm) just where the cursor is",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "timeinserter.insertDate",
+                "title": "Insert date (dd/mm/yyyy) just where the cursor is",
                 "when": "editorTextFocus"
             }
         ],
         "keybindings": [
             {
-                "command": "timeinserter.insert",
+                "command": "timeinserter.insertTime",
                 "key": "Ctrl+Alt+1",
                 "mac": "Ctrl+Alt+1",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "timeinserter.insertDate",
+                "key": "Ctrl+Alt+2",
+                "mac": "Ctrl+Alt+2",
                 "when": "editorTextFocus"
             }
         ]
