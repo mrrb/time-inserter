@@ -33,7 +33,7 @@
                 "timeinserter.dateSeparator": {
                     "type": "string",
                     "default": "/",
-                    "description": "String that separate the components of the date."
+                    "description": "String that separates the components of the date."
                 },
                 "timeinserter.format": {
                     "type": "boolean",
