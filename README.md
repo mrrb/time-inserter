@@ -1,13 +1,13 @@
 # Time Inserter
 
-Simple extension for Visual Studio Code that inserts the current time (hh:mm) in the editor.<br>
-I originally created it to quickly insert the current time in MarkDown LOG files \*[hh:mm]\* ("timeinserter.pre": "\*[" and "timeinserter.post": "]\*").
+Simple extension for Visual Studio Code that inserts the current time, date or both in the editor.
 
 ## Features
-  * Just insert the time/date ;D
-  * Ctrl+Shift+P and search for "Insert current time..." or "Insert date...".
+  * Insert current time/date
+  * Ctrl+Shift+P and search for "Insert current..."
   * Keybinding for time Ctrl+Alt+1.
   * Keybinding for date Ctrl+Alt+2.
+  * Keybinding for both Ctrl+Alt+3.
 
 ## Requirements
 
@@ -15,16 +15,17 @@ None!
 
 ## Extension Settings
 
-There are 4 preferences:
+There are 4 configurable properties:
 
-* `timeinserter.pre`:           String to add before the time (default: '').
-* `timeinserter.post`:          String to add after the time (default: '').
-* `timeinserter.format`:        Set the time format either to 24hour [hh:mm] or 12hour [hh:mm {am,pm}] (default: true [24h]) (default: true).
-* `timeinserter.dateSeparator`: String that separates the components of the date (default: '/').
+* `timeinserter.dateFormat`: Date format (using Unicode Technical Standard #35) *[default: 'yyyy-MM-dd']*
+* `timeinserter.timeFormat`:  Time format (using Unicode Technical Standard #35) *[default: 'HH:mm:ss']*
+* `timeinserter.dateTimeFormat`: Date and time format (using Unicode Technical Standard #35). If empty, date and time will be separated by a space *[default: '']*
+* `timeinserter.pre`: String to add before the time/date *[default: '']*
+* `timeinserter.post`: String to add before the time/date *[default: '']*
 
 ## Known Issues
 
-None!
+You tell me
 
 ## Release Notes
 
@@ -32,3 +33,6 @@ None!
   * Initial release.
 ### 0.0.2
   * Add date inserter (ctrl+alt+2)
+### 0.1.0
+  * Add date + time inserter (ctrl+alt+3)
+  * Use date-fns format

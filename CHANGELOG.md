@@ -19,3 +19,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Add date inserter.
 - Add property "dateSeparator" -> String that separate the components of the date.
 - Add keybinding for date (Default: Ctrl+Alt+2).
+
+## [0.1.0] - 2025-02-09
+### Add
+- Add date and time inserter.
+- Add keybinding for date and (Default: Ctrl+Alt+3).
+- Use date-fns format.
+- Add properties "dateFormat", "timeFormat" and "dateTimeFormat".
+- Remove deprecated properties.

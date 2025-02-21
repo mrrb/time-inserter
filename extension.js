@@ -1,60 +1,83 @@
 const vscode = require('vscode');
+const { format } = require('date-fns');
 
-function addZero(i) { return i < 10 ? "0"+i.toString() : i; }
-
+/* VSCode extension activation */
 function activate(context) {
-    const config = vscode.workspace.getConfiguration('timeinserter');
-    let disposable1 = vscode.commands.registerCommand('timeinserter.insertTime', function () {
-        let editor = vscode.window.activeTextEditor;
-        if (!editor) {
-            return;
-        }
 
-        var date = new Date();
-        var hour = date.getHours();
-        var min  = date.getMinutes();
-        var sec  = date.getSeconds();
+  /* Load config */
+  const config = vscode.workspace.getConfiguration('timeinserter');
 
-        var formatStr = '';
-        if(!config.format) {
-            formatStr = hour>12 ? ' pm' : ' am';
-            hour = hour>12 ? hour-12 : hour;
-        }
-        var dateText = `${config.pre}${addZero(hour).toString()}:${addZero(min).toString()}${formatStr}${config.post}`;
-        
-        const position = editor.selection.active;
+  /* Register the commands */
+  let insert_time = vscode.commands.registerCommand('timeinserter.insertTime', function () {
+    let editor = vscode.window.activeTextEditor;
+    if (!editor) {
+      /* No editor available */
+      return;
+    }
 
-        // vscode.window.showInformationMessage(dateText);
-        // vscode.window.showInformationMessage(JSON.stringify(position, null, 4));
+    /* Gen time string */
+    var timeText = format(new Date(), config.timeFormat);
+    timeText = `${config.pre}${timeText}${config.post}`;
 
-        editor.edit(function (editor) {
-            editor.insert(position, dateText);
-        });
+    /* Insert the time string */
+    const position = editor.selection.active;
+
+    editor.edit(function (editor) {
+      editor.insert(position, timeText);
     });
-    let disposable2 = vscode.commands.registerCommand('timeinserter.insertDate', function () {
-        let editor = vscode.window.activeTextEditor;
-        if (!editor) {
-            return;
-        }
+  });
 
-        var date   = new Date();
-        var day    = date.getDate();
-        var month  = date.getMonth()+1;
-        var year   = date.getFullYear();
+  let insert_date = vscode.commands.registerCommand('timeinserter.insertDate', function () {
+    let editor = vscode.window.activeTextEditor;
+    if (!editor) {
+      /* No editor available */
+      return;
+    }
 
-        var dateText = `${config.pre}${addZero(day).toString()}${config.dateSeparator}${addZero(month).toString()}${config.dateSeparator}${year.toString()}${config.post}`;
-        
-        const position = editor.selection.active;
+    /* Gen date string */
+    var dateText = format(new Date(), config.dateFormat);
+    dateText = `${config.pre}${dateText}${config.post}`;
 
-        editor.edit(function (editor) {
-            editor.insert(position, dateText);
-        });
+    /* Insert the date string */
+    const position = editor.selection.active;
+
+    editor.edit(function (editor) {
+      editor.insert(position, dateText);
     });
+  });
 
-    context.subscriptions.push([disposable1, disposable2]);
+  let insert_date_time = vscode.commands.registerCommand('timeinserter.insertDateTime', function () {
+    let editor = vscode.window.activeTextEditor;
+    if (!editor) {
+      /* No editor available */
+      return;
+    }
+
+    /* Gen date/time string */
+    var date_time_format = config.dateTimeFormat ? config.dateTimeFormat : `${config.dateFormat} ${config.timeFormat}`;
+
+    /* Gen date/time string */
+    var dateTimeText = format(new Date(), date_time_format);
+    dateTimeText = `${config.pre}${dateTimeText}${config.post}`;
+
+    /* Insert the date/time string */
+    const position = editor.selection.active;
+
+    editor.edit(function (editor) {
+      editor.insert(position, dateTimeText);
+    });
+  });
+
+  /* Add the commands to the context */
+  context.subscriptions.push([insert_time, insert_date, insert_date_time]);
 }
-exports.activate = activate;
 
+/* VSCode extension deactivation */
 function deactivate() {
 }
-exports.deactivate = deactivate;
+
+/* Export */
+module.exports = {
+  activate,
+  deactivate
+}

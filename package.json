@@ -1,79 +1,100 @@
 {
-    "name": "time-inserter",
-    "displayName": "Time Inserter",
-    "description": "Insert current time (hh:mm) or date (dd/mm/yyyy) just where the cursor is.",
-    "version": "0.0.2",
-    "publisher": "mario-mra",
-    "engines": {
-        "vscode": "^0.10.5"
-    },
-    "categories": [
-        "Other"
-    ],
-    "activationEvents": [
-        "onCommand:timeinserter.insertTime",
-        "onCommand:timeinserter.insertDate"
-    ],
-    "main": "./extension",
-    "contributes": {
-        "configuration": {
-            "type": "object",
-            "title": "Time Inserter configuration",
-            "properties": {
-                "timeinserter.pre": {
-                    "type": "string",
-                    "default": "",
-                    "description": "String to add before the time/date."
-                },
-                "timeinserter.post": {
-                    "type": "string",
-                    "default": "",
-                    "description": "String to add after the time/date."
-                },
-                "timeinserter.dateSeparator": {
-                    "type": "string",
-                    "default": "/",
-                    "description": "String that separates the components of the date."
-                },
-                "timeinserter.format": {
-                    "type": "boolean",
-                    "default": true,
-                    "description": "24hours format?"
-                }
-            }
+  "name": "time-inserter",
+  "displayName": "Time Inserter",
+  "description": "Insert current time or date in the editor",
+  "icon": "images/clock_256.png",
+  "version": "0.1.0",
+  "publisher": "mrrb",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mrrb/time-inserter"
+  },
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./extension.js",
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "Time Inserter configuration",
+      "properties": {
+        "timeinserter.dateFormat": {
+          "type": "string",
+          "default": "yyyy-MM-dd",
+          "description": "Date format (using Unicode Technical Standard #35)"
         },
-        "commands": [
-            {
-                "command": "timeinserter.insertTime",
-                "title": "Insert current time (hh:mm) just where the cursor is",
-                "when": "editorTextFocus"
-            },
-            {
-                "command": "timeinserter.insertDate",
-                "title": "Insert date (dd/mm/yyyy) just where the cursor is",
-                "when": "editorTextFocus"
-            }
-        ],
-        "keybindings": [
-            {
-                "command": "timeinserter.insertTime",
-                "key": "Ctrl+Alt+1",
-                "mac": "Ctrl+Alt+1",
-                "when": "editorTextFocus"
-            },
-            {
-                "command": "timeinserter.insertDate",
-                "key": "Ctrl+Alt+2",
-                "mac": "Ctrl+Alt+2",
-                "when": "editorTextFocus"
-            }
-        ]
+        "timeinserter.timeFormat": {
+          "type": "string",
+          "default": "HH:mm:ss",
+          "description": "Time format (using Unicode Technical Standard #35)"
+        },
+        "timeinserter.dateTimeFormat": {
+          "type": "string",
+          "default": "",
+          "description": "Date and time format (using Unicode Technical Standard #35). If empty, date and time will be separated by a space."
+        },
+        "timeinserter.pre": {
+          "type": "string",
+          "default": "",
+          "description": "String to add before the time/date."
+        },
+        "timeinserter.post": {
+          "type": "string",
+          "default": "",
+          "description": "String to add after the time/date."
+        }
+      }
     },
-    "devDependencies": {
-        "typescript": "^2.0.0",
-        "vscode": "^0.10.5",
-        "eslint": "^4.11.0",
-        "@types/node": "^7.0.43",
-        "@types/mocha": "^2.2.42"
-    }
+    "commands": [
+      {
+        "command": "timeinserter.insertTime",
+        "title": "Insert current time in the editor",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "timeinserter.insertDate",
+        "title": "Insert current date in the editor",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "timeinserter.insertDateTime",
+        "title": "Insert current date and time in the editor",
+        "when": "editorTextFocus"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "timeinserter.insertTime",
+        "key": "Ctrl+Alt+1",
+        "mac": "Ctrl+Alt+1",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "timeinserter.insertDate",
+        "key": "Ctrl+Alt+2",
+        "mac": "Ctrl+Alt+2",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "timeinserter.insertDateTime",
+        "key": "Ctrl+Alt+3",
+        "mac": "Ctrl+Alt+3",
+        "when": "editorTextFocus"
+      }
+    ]
+  },
+  "scripts": {},
+  "devDependencies": {
+    "@types/node": "20.x",
+    "@types/vscode": "^1.75.0",
+    "eslint": "^9.19.0"
+  },
+  "dependencies": {
+    "date-fns": "^4.1.0"
+  }
 }
