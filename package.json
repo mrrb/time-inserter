@@ -4,7 +4,7 @@
   "description": "Insert current time or date in the editor",
   "icon": "images/clock_256.png",
   "version": "0.1.0",
-  "publisher": "mrrb",
+  "publisher": "mario-mra",
   "repository": {
     "type": "git",
     "url": "https://github.com/mrrb/time-inserter"
