@@ -1,8 +1,9 @@
-dist:
-	mkdir -p dist
-	vsce package --dependencies --out dist
+dist: package
 
-package: dist
+package:
+	mkdir -p dist
+	npm run package
+	vsce package --dependencies --out dist
 
 install: package
 	code --install-extension dist/*.vsix | codium --install-extension dist/*.vsix

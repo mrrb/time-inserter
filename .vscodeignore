@@ -9,8 +9,9 @@ vsc-extension-quickstart.md
 **/eslint.config.mjs
 **/.vscode-test.*
 
-node_modules/*
-!node_modules/date-fns/**/*
+node_modules/**
+
+extension.js
 
 images/clock.svg
 images/clock_512.png
